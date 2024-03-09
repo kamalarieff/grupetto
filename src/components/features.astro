@@ -40,6 +40,13 @@ const features = [
     icon: "bx:bxs-user",
   },
 ];
+
+const links = [
+    { title: "About us", path: "/about" },
+    { title: "Our offers", path: "/offers" },
+    { title: "Our partners", path: "/partners" },
+    { title: "Gallery", path: "/gallery" },
+];
 ---
 
 <div class="mt-16 md:mt-0">
@@ -52,16 +59,13 @@ const features = [
   </p>
 </div>
 
-<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+<div class="grid sm:grid-cols-2 md:grid-cols-2 mt-16 gap-16">
   {
-    features.map((item) => (
+    links.map((item) => (
       <div class="flex gap-4 items-start">
-        <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
-          <Icon class="text-white" name={item.icon} />
-        </div>
         <div>
           <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+          <p class="text-slate-500 mt-2 leading-relaxed">{item.title}</p>
         </div>
       </div>
     ))

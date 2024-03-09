@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+
+// Filter team entries with 'draft: false' & date before current date
+const publishedTeamMembers = await getCollection("team", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+---
+
+<Layout title="Gallery">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Gallery</Fragment>
+      <Fragment slot="desc">We are a small passionate team.</Fragment>
+    </Sectionhead>
+
+    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
+      <div class="group">
+        <div class="w-full aspect-square">
+          <Picture
+            src="/4a22417b-a867-4dc6-ab66-2358d4f7a824.jpeg"
+            alt="clubhouse main"
+            sizes="(max-width: 800px) 100vw, 400px"
+            width={400}
+            height={400}
+            class="w-full rounded-md rounded transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
+          />
+        </div>
+      </div>
+      <div class="group">
+        <div class="w-full aspect-square">
+          <Picture
+            src="/050ba8f3-6ff1-47c6-9423-72f0943c3a30.jpeg"
+            alt="clubhouse main"
+            sizes="(max-width: 800px) 100vw, 400px"
+            width={400}
+            height={400}
+            class="w-full rounded-md rounded transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
+          />
+        </div>
+      </div>
+      <div class="group">
+        <div class="w-full aspect-square">
+          <Picture
+            src="/7513c592-26b8-4f89-b2d0-39bd6289d531.jpeg"
+            alt="clubhouse main"
+            sizes="(max-width: 800px) 100vw, 400px"
+            width={400}
+            height={400}
+            class="w-full rounded-md rounded transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
+          />
+        </div>
+      </div>
+    </div>
+  </Container>
+</Layout>

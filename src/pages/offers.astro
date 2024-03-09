@@ -1,0 +1,65 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import heroImage from "assets/hero-grupetto.png";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+
+// Filter team entries with 'draft: false' & date before current date
+const publishedTeamMembers = await getCollection("team", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+
+const offers = [
+    { title: "Community engagement" },
+    { title: "Rides" },
+    { title: "Grupetto membership" },
+    { title: "Workshop" },
+    { title: "Coffee and light shop" },
+    { title: "Merchandise" },
+    { title: "Bicycle parts & accessories" },
+    { title: "Content creation" },
+];
+---
+
+<Layout title="Offers">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Offers</Fragment>
+      <Fragment slot="desc">We are a small passionate team.</Fragment>
+    </Sectionhead>
+
+    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16">
+      <h2 class="font-bold text-3xl text-gray-800">
+        Empowering the world with Astro.
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        We're a multi-cultural team from around the world! We come from diverse
+        backgrounds, bringing different personalities, experiences and skills to
+        the job. This is what makes our team so special.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
+      {
+        offers.map((offer) => (
+          <div class="group">
+            <div class="w-full aspect-square flex justify-content items-center">
+              <Image
+                src={heroImage}
+                alt="grupetto logo"
+                width={200}
+                height={200}
+                class="w-full rounded-md rounded transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white"
+              />
+            </div>
+
+            <div class="mt-4 text-center">
+              <h2 class="text-lg text-gray-800">{offer.title}</h2>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</Layout>

@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+
+// Filter team entries with 'draft: false' & date before current date
+const partners = await getCollection("partners", ({ data }) => {
+  return data
+});
+---
+
+<Layout title="Partners">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Partners</Fragment>
+      <Fragment slot="desc">We are a small passionate team.</Fragment>
+    </Sectionhead>
+
+    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16">
+      <h2 class="font-bold text-3xl text-gray-800">
+        Our Partners
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        Introducing our partners
+      </p>
+    </div>
+    <div class="grid md:grid-cols-5 gap-10 mx-auto max-w-4xl mt-12">
+      {
+        partners.map((partner) => (
+          <div class="group">
+            <div class="w-full aspect-square">
+              <Picture
+                src={partner.data.avatar.src}
+                alt={partner.data.avatar.alt}
+                sizes="(max-width: 800px) 100vw, 400px"
+                width={400}
+                height={400}
+                class="w-full rounded-md rounded transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
+              />
+            </div>
+
+            <div class="mt-4 text-center">
+              <h2 class="text-lg text-gray-800">{partner.data.name}</h2>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</Layout>
