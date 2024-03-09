@@ -2,6 +2,21 @@
 import { Tick } from "@components/ui/icons";
 import Link from "@components/ui/link.astro";
 
+interface Props {
+  plan: {
+    name: string;
+    features: string[];
+    price:
+      | string
+      | { original: string; monthly: string; annual: string; discount: string };
+    button: {
+      text: string;
+      link: string;
+    };
+    popular?: boolean;
+  };
+}
+
 const { plan } = Astro.props;
 ---
 
